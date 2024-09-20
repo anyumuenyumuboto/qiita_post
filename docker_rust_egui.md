@@ -9,12 +9,13 @@ docker CLI
 
 ### ディレクトリ構成
 
+```
 docker_rust
 ├── compose.yml
 ├── rust
 │   └── Dockerfile
 └── workspace
-
+```
 
 ```yml:compose.yml
 services:
@@ -90,10 +91,15 @@ error: component download failed for rustc-x86_64-unknown-linux-gnu: error decod
 
 ### 補足
 
-
 [emilk/eframe_template at master](https://github.com/emilk/eframe_template/tree/master)
 に書かれている通りに実行した。
-ただし、winitのエラーが出て、waylandのコンポジターーがないとのエラーが出たので、x11上で実行させるために、
+ただし、以下のエラーが発生して、waylandのコンポジターがないと出たので、waylandではなく、x11で動作させた。
+
+```shell-console
+Error: WinitEventLoop(Os(OsError { line: 81, file: "/home/anyumu/.cargo/registry/src/index.crates.io-6f17d22bba15001f/winit-0.29.9/src/platform_impl/linux/wayland/event_loop/mod.rs", error: WaylandError(Connection(NoCompositor)) }))
+```
+
+x11上で実行させるために、
 xserver-xorg をインストールし、
 (x11-appsはxserverの動作確認用にインストール。xeyesコマンドを打てば、目玉が表示される)
 以下の環境変数を設定した
@@ -112,4 +118,7 @@ WAYLAND_DISPLAY=""
 [Ubuntu 20.04 LTS に後から GUI (X Window System) を追加する - CUBE SUGAR CONTAINER](https://blog.amedama.jp/entry/ubuntu-2004-install-gui)
 
 [WindowsのDocker環境でRust GUIアプリを動かす #gtk-rs - Qiita](https://qiita.com/t13801206/items/27b17a3b027ebdd7319b)
+
+[【Rust】winit と tiny-skia で低レベルなグラフィックス描画〜ことはじめ〜 - A Memorandum](https://blog1.mammb.com/entry/2024/03/12/000000)
+
 
