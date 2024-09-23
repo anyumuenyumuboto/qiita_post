@@ -93,6 +93,7 @@ error: component download failed for rustc-x86_64-unknown-linux-gnu: error decod
 
 [emilk/eframe_template at master](https://github.com/emilk/eframe_template/tree/master)
 に書かれている通りに実行した。
+
 ただし、以下のエラーが発生して、waylandのコンポジターがないと出たので、waylandではなく、x11で動作させた。
 
 ```shell-console
@@ -100,12 +101,15 @@ Error: WinitEventLoop(Os(OsError { line: 81, file: "/home/anyumu/.cargo/registry
 ```
 
 x11上で実行させるために、
-xserver-xorg をインストールし、
-(x11-appsはxserverの動作確認用にインストール。xeyesコマンドを打てば、目玉が表示される)
+xserver-xorg をインストール[^1]し、
 以下の環境変数を設定した
-XDG_SESSION_TYPE=x11
-WAYLAND_DISPLAY=""
 
+[^1]:x11-appsもxserverの動作確認用にインストール。xeyesコマンドを打てば、目玉が表示される
+
+```bash
+export XDG_SESSION_TYPE=x11
+export WAYLAND_DISPLAY=""
+```
 
 ### 参考
 
